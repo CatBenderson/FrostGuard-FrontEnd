@@ -1,47 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CamionItem from "./CamionItem";
+import * as CamionesServer from './CamionesServer'
 
 const CamionesList = () => {
-    const [camiones, setCamiones] = useState([{
-        id: 0,
-        nombreC: "Ameyalli Huerta Mendoza",
-        temperatura: 24.1,
-        carga: "Manzanas",
-        cantidad: 250,
-        latitud: -19.2345666,
-        longitud: 19.823456
-    },{
-        id: 1,
-        nombreC: "Ameyalli Huerta Mendoza",
-        temperatura: 24.1,
-        carga: "Manzanas",
-        cantidad: 250,
-        latitud: -19.2345666,
-        longitud: 19.823456
-    },{
-        id: 2,
-        nombreC: "Ameyalli Huerta Mendoza",
-        temperatura: 24.1,
-        carga: "Manzanas",
-        cantidad: 250,
-        latitud: -19.2345666,
-        longitud: 19.823456
-    },{
-        id: 3,
-        nombreC: "Ameyalli Huerta Mendoza",
-        temperatura: 24.1,
-        carga: "Manzanas",
-        cantidad: 250,
-        latitud: -19.2345666,
-        longitud: 19.823456
-    }])
-    // const [camiones,setCamiones]=useState([{id:0, nombreC:"",temperatura:0.0,carga:"",cantidad:0,latitud:0.0,longitud:0.0}])
+
+    const [camiones, setCamiones] = useState([]);
+
+    const listaCamiones = async () =>{
+        try{
+            const data = await (await CamionesServer.getAllCamiones()).json();
+            setCamiones(data.data);
+        }catch(error){
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        listaCamiones();
+        // eslint-disable-next-line
+    });
 
     return (
         <>
             {camiones.map((camion) => (
-                <CamionItem camion={camion} />
-            ))}
+                <CamionItem key={camion.id} camion={camion} listaCamiones={camion} />
+            ))}  
         </>
     );
 };

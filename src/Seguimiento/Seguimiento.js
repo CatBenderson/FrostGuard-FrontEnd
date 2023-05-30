@@ -5,7 +5,7 @@ import './Seguimiento.css'
 
 
 function Seguimiento() {
-  const URL = "ws://192.168.0.104:9001";
+  const URL = "ws://192.168.137.1:9001";
   const client = mqtt.connect(URL);
   const [res, setRes] = useState({})
   const [position, setPosition] = useState([19.494102, -96.91589])
@@ -66,6 +66,7 @@ function Seguimiento() {
   function enviar() {
     var enviado = document.getElementById("txtIn").value;
     client.publish("ChatAdmin", enviado);
+    document.getElementById("txtIn").value="";
   }
 
   return (
@@ -96,19 +97,19 @@ function Seguimiento() {
       <div className='datos'>
         <div className='datosI'>
           Temperatura
-          <h3>{res.temperatura}°</h3>
+          <h3 className="h3">{res.temperatura}°</h3>
         </div>
         <div className='datosI'>
           Humedad
-          <h3>{res.humedad}%</h3>
+          <h3 className="h3">{res.humedad}%</h3>
         </div>
         <div className='datosI'>
           Latitud
-          <h3>'{res.c1}'</h3>
+          <h3 className="h3">'{res.c1}'</h3>
         </div>
         <div className='datosI'>
           Longitud
-          <h3>'{res.c2}'</h3>
+          <h3 className="h3">'{res.c2}'</h3>
         </div>
       </div>
     </div>
