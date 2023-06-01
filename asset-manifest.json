@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/CatBenderson/FrostGuard-FrontEnd/static/css/main.12f16fbe.css",
+    "main.js": "/CatBenderson/FrostGuard-FrontEnd/static/js/main.afe78af4.js",
+    "static/js/787.3256af4e.chunk.js": "/CatBenderson/FrostGuard-FrontEnd/static/js/787.3256af4e.chunk.js",
+    "index.html": "/CatBenderson/FrostGuard-FrontEnd/index.html",
+    "main.12f16fbe.css.map": "/CatBenderson/FrostGuard-FrontEnd/static/css/main.12f16fbe.css.map",
+    "main.afe78af4.js.map": "/CatBenderson/FrostGuard-FrontEnd/static/js/main.afe78af4.js.map",
+    "787.3256af4e.chunk.js.map": "/CatBenderson/FrostGuard-FrontEnd/static/js/787.3256af4e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.12f16fbe.css",
+    "static/js/main.afe78af4.js"
+  ]
+}
