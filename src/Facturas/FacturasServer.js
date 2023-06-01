@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8070/facturas/";
+const API_URL = "https://facturas-production.up.railway.app/facturas";
 
 export const getAllFacturas = async () => {
     return await fetch(API_URL);
@@ -43,7 +43,7 @@ export const registerFactura = async (nuevaFactura) => {
 };*/
 
 export const deleteFactura = async (facturaId) => {
-    return await fetch(`${API_URL}${facturaId}`, {
+    return await fetch(`${API_URL}/${facturaId}`, {
         method:'DELETE'
     });
 };
