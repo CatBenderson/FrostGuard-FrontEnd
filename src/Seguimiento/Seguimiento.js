@@ -5,7 +5,7 @@ import './Seguimiento.css'
 
 
 function Seguimiento() {
-  const URL = "ws://192.168.137.1:9001";
+  const URL = "wss://test.mosquitto.org:8081";
   const client = mqtt.connect(URL);
   const [res, setRes] = useState({})
   const [position, setPosition] = useState([19.494102, -96.91589])
@@ -28,29 +28,32 @@ function Seguimiento() {
     if (topic == "/temperaturaA") {
       respuesta = JSON.parse(message.toString());
       setRes(respuesta);
-      try{
-        if(respuesta.c1){
-          setPosition([respuesta.c1, respuesta.c2])
-        }else{
-          setPosition([19.494102, -96.91589])
-        }
-      }catch(error){
-        console.log(error)
+      if (res.temperatura > 28) {
+        window.alert("Temperatura muy elevada.")
       }
-    } else if (topic == "ChatAdmin") {
-      var noteA = "<div className='mensajeI'>Yo: " + message.toString() + "</div>";
-      try {
-        var auxA = document.getElementById("mensajes").innerHTML
-        document.getElementById("mensajes").innerHTML = auxA + noteA
-      } catch (error) { }
-    } else if (topic == "ChatChofer") {
-      var noteC = "<div className='mensajeI'>Chofer: " + message.toString() + "</div>";
-      try {
-        var auxC = document.getElementById("mensajes").innerHTML
-        document.getElementById("mensajes").innerHTML = auxC + noteC
-      } catch (error) { }
-    }
-  });
+        try {
+          if (respuesta.c1) {
+            setPosition([respuesta.c1, respuesta.c2])
+          } else {
+            setPosition([19.494102, -96.91589])
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      } else if (topic == "ChatAdmin") {
+        var noteA = "<div className='mensajeI'>Yo: " + message.toString() + "</div>";
+        try {
+          var auxA = document.getElementById("mensajes").innerHTML
+          document.getElementById("mensajes").innerHTML = auxA + noteA
+        } catch (error) { }
+      } else if (topic == "ChatChofer") {
+        var noteC = "<div className='mensajeI'>Chofer: " + message.toString() + "</div>";
+        try {
+          var auxC = document.getElementById("mensajes").innerHTML
+          document.getElementById("mensajes").innerHTML = auxC + noteC
+        } catch (error) { }
+      }
+    });
 
   // client.on('message', function (topic, message) {
   //   respuesta= JSON.parse(message.toString());
@@ -66,7 +69,7 @@ function Seguimiento() {
   function enviar() {
     var enviado = document.getElementById("txtIn").value;
     client.publish("ChatAdmin", enviado);
-    document.getElementById("txtIn").value="";
+    document.getElementById("txtIn").value = "";
   }
 
   return (
